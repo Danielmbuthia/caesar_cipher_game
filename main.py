@@ -4,25 +4,24 @@ direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
 text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
 
+
 def caesar(text,shift,direction):
-    if direction == "encode":
-        encrypted_word =""
-        for letter in text:
-            position = alphabet.index(letter)
+    word = ""
+    for letter in text:
+        position = alphabet.index(letter)
+        if direction == "encode":
             new_position = position + shift
             if new_position > 25: # index start from 0
                 new_position -= 26 # position is 26 len of list 
             new_letter = alphabet[new_position]
-            encrypted_word += new_letter
-        print(f"The encoded text is {encrypted_word}") 
-    elif direction == "decrypt":
-        decrypted_word =""
-        for letter in text:
-            position = alphabet.index(letter) - shift
-            if position < 0: # index start from 0
-                position += 26 # position is 26 len of list 
-            new_letter = alphabet[position]
-            decrypted_word += new_letter
-        print(f"The decoded text is {decrypted_word}")
+            word += new_letter
+        elif direction == "decode":
+            new_position = position - shift
+            if new_position < 0: # index start from 0
+                new_position += 26 # position is 26 len of list 
+            new_letter = alphabet[new_position]
+            word += new_letter 
+    print(f"The {direction}d text is {word}")
+
 
 caesar(text,shift,direction)
